@@ -1,6 +1,10 @@
+//Importaciones
+
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+//Capturaciones de datos 
 
 export default function datos({ navigation }) {
   return (
@@ -31,6 +35,8 @@ export default function datos({ navigation }) {
     </View>
   );
 }
+
+// Se comienza el codigo de css
 
 const styles = StyleSheet.create({
   screen: {
