@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 
+
+//Contenido de la recuperacion de contraseña
 export default function recupercion({ navigation }) {
   return (
     <View style={styles.screen}>
@@ -29,6 +31,8 @@ export default function recupercion({ navigation }) {
   );
 }
 
+
+//comienza el css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

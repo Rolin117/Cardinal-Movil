@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 
+//Contenido de la pagina cambiar contraseña
 export default function cambio({ navigation }) {
   return (
     <View style={styles.screen}>
@@ -21,6 +22,7 @@ export default function cambio({ navigation }) {
   );
 }
 
+// Se comienza el codigo de css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
