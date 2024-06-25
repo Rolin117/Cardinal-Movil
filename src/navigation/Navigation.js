@@ -1,3 +1,5 @@
+//Importaciones 
+
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,6 +13,8 @@ import Home from '../Screens/home';
 
 const Stack = createStackNavigator();
 
+//Stack Navigator para la navegación de las pantallas 
+
 function MyStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -23,6 +27,8 @@ function MyStack() {
     </Stack.Navigator>
   );
 }
+
+//Función que retorna el stack para las demás pantallas
 
 export default function Navigation() {
   return (
