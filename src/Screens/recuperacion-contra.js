@@ -1,3 +1,5 @@
+//Importaciones 
+
 import React from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 

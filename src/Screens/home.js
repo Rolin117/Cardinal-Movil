@@ -1,3 +1,5 @@
+//Importaciones 
+
 import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
