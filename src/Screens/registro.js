@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 
+// Contenido de la página principal
 export default function registro({ navigation }) {
   return (
     <View style={styles.screen}>
@@ -9,7 +10,8 @@ export default function registro({ navigation }) {
         <View style={styles.header}>
           <Text style={styles.title}>Suministros y Servicios Tecnicos</Text>
         </View>
-        <View style={styles.inputContainer}>
+
+        <View style={styles.inputContainer} /* Se ingresan datos del usuario */>
           <View style={styles.row}>
             <TextInput style={[styles.input, styles.halfInput]} placeholder="Nombre" />
             <TextInput style={[styles.input, styles.halfInput]} placeholder="Apellido" />
@@ -31,6 +33,7 @@ export default function registro({ navigation }) {
   );
 }
 
+//Se comienza el código css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView 
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Contenido de la página principal
 export default function home({ navigation }) {
   return (
     <View style={styles.screen}>
@@ -44,6 +45,7 @@ export default function home({ navigation }) {
   );
 }
 
+//Se comienza el código css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

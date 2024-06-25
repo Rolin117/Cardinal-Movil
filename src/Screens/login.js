@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 
+// Contenido de la página principal
 export default function login({ navigation }) {
   return (
     <View style={styles.screen}>
@@ -9,7 +10,7 @@ export default function login({ navigation }) {
         <View style={styles.header}>
           <Text style={styles.title}>Suministros y Servicios Tecnicos</Text>
         </View>
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainer} /* El usuario ingresa sus credenciales */>
           <TextInput style={styles.input} placeholder="Correo" keyboardType="email-address" />
           <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry={true} />
         </View>
@@ -29,6 +30,7 @@ export default function login({ navigation }) {
   );
 }
 
+//Se comienza el código css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
