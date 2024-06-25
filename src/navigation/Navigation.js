@@ -7,6 +7,7 @@ import Registro from '../Screens/registro';
 import Recuperacion from '../Screens/recuperacion-contra';
 import CambioContra from '../Screens/cambio-contra';
 import DatosU from '../Screens/datos-usuario';
+import Home from '../Screens/home';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ function MyStack() {
       <Stack.Screen name="recuperacion-contra" component={Recuperacion} />
       <Stack.Screen name="cambio-contra" component={CambioContra} />
       <Stack.Screen name="datos-usuario" component={DatosU} />
+      <Stack.Screen name="home" component={Home} />
     </Stack.Navigator>
   );
 }

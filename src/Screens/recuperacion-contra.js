@@ -15,7 +15,7 @@ export default function recupercion({ navigation }) {
             <Text style={styles.buttonText}>Enviar Código</Text>
           </TouchableOpacity>
           <TextInput style={styles.input} placeholder="Código de Recuperación" keyboardType="numeric" />
-          <TouchableOpacity style={styles.button} onPress={() => { /* lógica para continuar */ }}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('cambio-contra')}>
             <Text style={styles.buttonText}>Continuar</Text>
           </TouchableOpacity>
         </View>
