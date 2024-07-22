@@ -4,6 +4,7 @@ import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import detalle_producto from './detalle_producto';
 
 // Contenido de la página principal
 export default function home({ navigation }) {
@@ -19,8 +20,10 @@ export default function home({ navigation }) {
       <ScrollView contentContainerStyle={styles.container}>
         {[1, 2, 3, 4].map((item, index) => (
           <Card key={index} containerStyle={styles.card}>
-            <Card.Image style={styles.productImage} source={require('../img/kit.png')} />
+            <TouchableOpacity onPress={() => navigation.navigate('detalle_producto')}>
+            <Card.Image style={styles.productImage} source={require('../img/kit.png')}/>
             <Card.Divider />
+            </TouchableOpacity>
             <Text style={styles.productName}>Producto {item}</Text>
             <Text style={styles.productPrice}>$10.00</Text>
             <TouchableOpacity style={styles.button} onPress={() => { /* lógica para añadir al carrito */ }}>
