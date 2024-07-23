@@ -1,10 +1,60 @@
-//Importaciones
+import React, { useState } from 'react';
+import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 
-import React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
+export default function Registro({ navigation }) {
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
 
-// Contenido de la página principal
-export default function registro({ navigation }) {
+  const telefonoRegex = /^\d{4}-\d{4}$/;
+
+  const handleRegister = () => {
+    // Validar los campos del formulario
+    if (!nombre || !apellido || !telefono || !correo || !contrasena) {
+      Alert.alert('Error', 'Por favor, complete todos los campos');
+      return; 
+    }
+
+    const fechaMinima = new Date();
+fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
+      // Validar los campos
+      if (!nombre.trim() || !apellido.trim() || !correo.trim() || !telefono.trim() || !contrasena.trim()) {
+          Alert.alert("Debes llenar todos los campos");
+          return;
+      } else if (!telefonoRegex.test(telefono)) {
+          Alert.alert("El teléfono debe tener el formato correcto (####-####)");
+          return;
+}
+
+    // Preparar datos para enviar al backend
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('apellido', apellido);
+    formData.append('telefono', telefono);
+    formData.append('correo', correo);
+    formData.append('contrasena', contrasena);
+
+    // Enviar solicitud al backend
+    fetch('https://your-backend-api-url/register', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Alert.alert('Éxito', 'Registro exitoso');
+          navigation.navigate('login');
+        } else {
+          Alert.alert('Error', data.message || 'Algo salió mal');
+        }
+      })
+      .catch(error => {
+        Alert.alert('Error', 'No se pudo conectar con el servidor');
+      });
+  };
+
   return (
     <View style={styles.screen}>
       <Image source={require('../img/Logo.png')} style={styles.icon} />
@@ -13,16 +63,44 @@ export default function registro({ navigation }) {
           <Text style={styles.title}>Suministros y Servicios Tecnicos</Text>
         </View>
 
-        <View style={styles.inputContainer} /* Se ingresan datos del usuario */>
+        <View style={styles.inputContainer}>
           <View style={styles.row}>
-            <TextInput style={[styles.input, styles.halfInput]} placeholder="Nombre" />
-            <TextInput style={[styles.input, styles.halfInput]} placeholder="Apellido" />
+            <TextInput
+              style={[styles.input, styles.halfInput]}
+              placeholder="Nombre"
+              value={nombre}
+              onChangeText={setNombre}
+            />
+            <TextInput
+              style={[styles.input, styles.halfInput]}
+              placeholder="Apellido"
+              value={apellido}
+              onChangeText={setApellido}
+            />
           </View>
-          <TextInput style={styles.input} placeholder="Teléfono" keyboardType="phone-pad" />
-          <TextInput style={styles.input} placeholder="Correo" keyboardType="email-address" />
-          <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry={true} />
+          <TextInput
+            style={styles.input}
+            placeholder="Teléfono"
+            keyboardType="phone-pad"
+            value={telefono}
+            onChangeText={setTelefono}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Correo"
+            keyboardType="email-address"
+            value={correo}
+            onChangeText={setCorreo}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            secureTextEntry={true}
+            value={contrasena}
+            onChangeText={setContrasena}
+          />
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => { /* lógica para registrarse */ }}>
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
         <View style={styles.footer}>
@@ -35,7 +113,6 @@ export default function registro({ navigation }) {
   );
 }
 
-//Se comienza el código css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
