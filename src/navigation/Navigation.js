@@ -11,7 +11,7 @@ import CambioContra from '../Screens/cambio-contra';
 import DatosU from '../Screens/datos-usuario';
 import Home from '../Screens/home';
 import DetalleProducto from '../Screens/detalle_producto';
-
+import LoadingScreen from '../Screens/pantalla_carga';
 const Stack = createStackNavigator();
 
 //Stack Navigator para la navegación de las pantallas 
@@ -19,6 +19,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="pantalla_carga" component={LoadingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="registro" component={Registro} />
       <Stack.Screen name="recuperacion-contra" component={Recuperacion} />
