@@ -11,6 +11,9 @@ import CambioContra from '../Screens/cambio-contra';
 import DatosU from '../Screens/datos-usuario';
 import Home from '../Screens/home';
 import DetalleProducto from '../Screens/detalle_producto';
+import Servicios from '../Screens/servicios';
+import Carrito from '../Screens/carrito';
+
 
 const Stack = createStackNavigator();
 
@@ -26,6 +29,10 @@ function MyStack() {
       <Stack.Screen name="datos-usuario" component={DatosU} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="detalle_producto" component={DetalleProducto} />
+      <Stack.Screen name="servicios" component={Servicios} />
+      <Stack.Screen name="carrito" component={Carrito} />
+
+
     </Stack.Navigator>
   );
 }

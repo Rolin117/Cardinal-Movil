@@ -46,9 +46,11 @@ export default function DetalleProducto({ navigation }) {
                                 <Text style={styles.quantityButtonText}>+</Text>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.button}>
+                        <View style={styles.button}>
+                        <TouchableOpacity onPress={() => navigation.navigate('carrito')}>
                             <Text style={styles.buttonText}>Agregar al carrito</Text>
                         </TouchableOpacity>
+                        </View>
                     </Card>
                 </View>
             </ScrollView>

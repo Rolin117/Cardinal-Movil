@@ -21,8 +21,8 @@ export default function home({ navigation }) {
         {[1, 2, 3, 4].map((item, index) => (
           <Card key={index} containerStyle={styles.card}>
             <TouchableOpacity onPress={() => navigation.navigate('detalle_producto')}>
-            <Card.Image style={styles.productImage} source={require('../img/kit.png')}/>
-            <Card.Divider />
+              <Card.Image style={styles.productImage} source={require('../img/kit.png')} />
+              <Card.Divider />
             </TouchableOpacity>
             <Text style={styles.productName}>Producto {item}</Text>
             <Text style={styles.productPrice}>$10.00</Text>
@@ -33,16 +33,16 @@ export default function home({ navigation }) {
         ))}
       </ScrollView>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => { /* lógica para navegar a Home */ }}>
+        <TouchableOpacity onPress={() => { }}>
           <Icon name="cogs" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { /* lógica para navegar a otra pantalla */ }}>
+        <TouchableOpacity onPress={() => navigation.navigate('servicios')}>
           <Icon name="address-book" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
           <Icon name="user" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { /* lógica para navegar a otra pantalla */ }}>
+        <TouchableOpacity onPress={() => { }}>
           <Icon name="history" size={24} color="black" />
         </TouchableOpacity>
       </View>

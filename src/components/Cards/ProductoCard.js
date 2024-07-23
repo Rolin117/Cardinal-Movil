@@ -5,10 +5,10 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 export default function ProductoCard({ ip, nombre_producto, imagen_producto, precio_producto, onPress }) {
   return (
     <TouchableOpacity style={styles.card} onPress={() => onPress(id_producto)}>
-      <Image 
-        source={{ uri: `${ip}/Cardinal_SST-Final/api/images/productos/${imagen_producto}` }} 
-        style={styles.image} 
-        resizeMode="cover" 
+      <Image
+        source={{ uri: `${ip}/Cardinal_SST-Final/api/images/productos/${imagen_producto}` }}
+        style={styles.image}
+        resizeMode="cover"
       />
       <Text style={styles.name}>{nombre_producto}</Text>
       <Text style={styles.price}>${precio_producto}</Text>
