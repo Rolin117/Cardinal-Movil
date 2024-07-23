@@ -14,6 +14,7 @@ import DetalleProducto from '../Screens/detalle_producto';
 import LoadingScreen from '../Screens/pantalla_carga';
 import Servicios from '../Screens/servicios';
 import Carrito from '../Screens/carrito';
+import Contacto from '../Screens/contacto';
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ function MyStack() {
       <Stack.Screen name="detalle_producto" component={DetalleProducto} />
       <Stack.Screen name="servicios" component={Servicios} />
       <Stack.Screen name="carrito" component={Carrito} />
+      <Stack.Screen name="contacto" component={Contacto} />
     </Stack.Navigator>
   );
 }

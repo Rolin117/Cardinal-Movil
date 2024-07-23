@@ -33,13 +33,13 @@ export default function home({ navigation }) {
         ))}
       </ScrollView>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
           <Icon name="cogs" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('servicios')}>
           <Icon name="address-book" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
+        <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
           <Icon name="user" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { }}>
