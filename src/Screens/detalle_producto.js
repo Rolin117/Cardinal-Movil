@@ -1,11 +1,22 @@
-// Importaciones 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Contenido de la página principal
-export default function detalle_producto({ navigation }) {
+export default function DetalleProducto({ navigation }) {
+    const [quantity, setQuantity] = useState(1);
+
+    const incrementQuantity = () => {
+        setQuantity(quantity + 1);
+    };
+
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
@@ -16,15 +27,30 @@ export default function detalle_producto({ navigation }) {
                 </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={styles.container}>
-                <Card containerStyle={styles.card}>
-                    <Card.Image style={styles.productImage} source={require('../img/kit.png')} />
-                    <Card.Divider />
-                    <Text style={styles.productName}>Kit de herramienta</Text>
-                    <Text style={styles.productPrice}>$59.99</Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Agregar al carrito</Text>
-                    </TouchableOpacity>
-                </Card>
+                <View style={styles.productContainer}>
+                    <Image style={styles.productImage} source={require('../img/kit.png')} />
+                    <Card containerStyle={styles.card}>
+                        <Text style={styles.productName}>Kit de herramienta</Text>
+                        <Text style={styles.productPrice}>$59.99</Text>
+                        <View style={styles.quantityContainer}>
+                            <TouchableOpacity style={styles.quantityButton} onPress={decrementQuantity}>
+                                <Text style={styles.quantityButtonText}>-</Text>
+                            </TouchableOpacity>
+                            <TextInput 
+                                style={styles.quantityInput} 
+                                value={String(quantity)} 
+                                onChangeText={(text) => setQuantity(parseInt(text) || 1)}
+                                keyboardType='numeric'
+                            />
+                            <TouchableOpacity style={styles.quantityButton} onPress={incrementQuantity}>
+                                <Text style={styles.quantityButtonText}>+</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.buttonText}>Agregar al carrito</Text>
+                        </TouchableOpacity>
+                    </Card>
+                </View>
             </ScrollView>
         </View>
     );
@@ -58,19 +84,21 @@ const styles = StyleSheet.create({
     cartIcon: {
         marginLeft: 16,
     },
-    container: {
+   
+    productContainer: {
+        backgroundColor: '#fff',
         padding: 16,
-        alignItems: 'center',
-    },
-    card: {
-        width: '100%',
+        borderRadius: 8,
         marginBottom: 16,
+        width: '100%',
     },
     productImage: {
         width: '100%',
         height: 300,
         resizeMode: 'contain',
+        marginBottom: 16,
     },
+
     productName: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -82,6 +110,33 @@ const styles = StyleSheet.create({
         color: '#888',
         marginVertical: 8,
         textAlign: 'center',
+    },
+    quantityContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 15,
+    },
+    quantityButton: {
+        backgroundColor: '#fff',
+        padding: 15,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#fff',
+    },
+    quantityButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000',
+    },
+    quantityInput: {
+        width: 50,
+        textAlign: 'center',
+        marginHorizontal: 8,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 5,
+        padding: 8,
     },
     button: {
         backgroundColor: '#00B207',
