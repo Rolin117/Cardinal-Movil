@@ -11,6 +11,7 @@ import CambioContra from '../Screens/cambio-contra';
 import DatosU from '../Screens/datos-usuario';
 import Home from '../Screens/home';
 import DetalleProducto from '../Screens/detalle_producto';
+import LoadingScreen from '../Screens/pantalla_carga';
 import Servicios from '../Screens/servicios';
 import Carrito from '../Screens/carrito';
 
@@ -22,6 +23,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="pantalla_carga" component={LoadingScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="registro" component={Registro} />
       <Stack.Screen name="recuperacion-contra" component={Recuperacion} />
@@ -31,8 +33,6 @@ function MyStack() {
       <Stack.Screen name="detalle_producto" component={DetalleProducto} />
       <Stack.Screen name="servicios" component={Servicios} />
       <Stack.Screen name="carrito" component={Carrito} />
-
-
     </Stack.Navigator>
   );
 }
