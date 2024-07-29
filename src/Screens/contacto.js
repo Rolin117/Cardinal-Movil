@@ -1,10 +1,7 @@
-//Importaciones 
-
+// Importaciones 
 import React from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import detalle_producto from './detalle_producto';
 
 // Contenido de la página principal
 export default function home({ navigation }) {
@@ -17,14 +14,23 @@ export default function home({ navigation }) {
           <Icon name="shopping-cart" size={24} color="black" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.productName}>Contactanos!</Text>
-      <Text style={styles.contacDescription}>¿Quieres contratar uno de nuestros servicios o tienes una consulta?.
-        Ponte en contacto con nosotros.</Text>
+      <View style={styles.container}>
+        <Text style={styles.productName}>¡Contáctanos!</Text>
+        <Text style={styles.contacDescription}>
+          ¿Quieres contratar uno de nuestros servicios o tienes una consulta?
+          Ponte en contacto con nosotros.
+        </Text>
+        <Text style={styles.productName}>Hola!, escribenos tu problema</Text>
+        <TextInput style={styles.input} placeholder="Mensaje" multiline={true} numberOfLines={4} />
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Enviar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-//Se comienza el código css
+// Se comienza el código css
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -55,7 +61,6 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
-    margin: 20,
     alignItems: 'center',
   },
   card: {
@@ -71,11 +76,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 40,
   },
-
   contacDescription: {
     marginTop: 15,
+    textAlign: 'bold',
   },
-
+  input: {
+    width: '100%',
+    padding: 10,
+    fontSize: 20,
+    marginVertical: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginTop: 40,
+  },
   productPrice: {
     fontSize: 16,
     color: '#888',
@@ -86,11 +100,14 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
+    marginTop: 20,
+    width: '100%',
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+    marginTop: 3,
   },
   footer: {
     flexDirection: 'row',
