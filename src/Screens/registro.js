@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Alert } from 'react-native';
+import * as Constantes from '../utils/consantes';
 
 export default function Registro({ navigation }) {
+  const ip = Constantes.IP;
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -10,23 +12,23 @@ export default function Registro({ navigation }) {
 
   const telefonoRegex = /^\d{4}-\d{4}$/;
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     // Validar los campos del formulario
     if (!nombre || !apellido || !telefono || !correo || !contrasena) {
       Alert.alert('Error', 'Por favor, complete todos los campos');
-      return; 
+      return;
     }
 
     const fechaMinima = new Date();
-fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
-      // Validar los campos
-      if (!nombre.trim() || !apellido.trim() || !correo.trim() || !telefono.trim() || !contrasena.trim()) {
-          Alert.alert("Debes llenar todos los campos");
-          return;
-      } else if (!telefonoRegex.test(telefono)) {
-          Alert.alert("El teléfono debe tener el formato correcto (####-####)");
-          return;
-}
+    fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
+    // Validar los campos
+    if (!nombre.trim() || !apellido.trim() || !correo.trim() || !telefono.trim() || !contrasena.trim()) {
+      Alert.alert("Debes llenar todos los campos");
+      return;
+    } else if (!telefonoRegex.test(telefono)) {
+      Alert.alert("El teléfono debe tener el formato correcto (####-####)");
+      return;
+    }
 
     // Preparar datos para enviar al backend
     const formData = new FormData();
@@ -36,8 +38,20 @@ fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
     formData.append('correo', correo);
     formData.append('contrasena', contrasena);
 
-    // Enviar solicitud al backend
-    fetch('https://your-backend-api-url/register', {
+    const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=signUpMovil`, {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await response.json();
+    if (data.status) {
+      Alert.alert('Datos Guardados correctamente');
+      navigation.navigate('Sesion');
+    } else {
+      Alert.alert('Error', data.error);
+    }
+    /* 
+    fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=signUpMovil`, {
       method: 'POST',
       body: formData,
     })
@@ -51,8 +65,8 @@ fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
         }
       })
       .catch(error => {
-        Alert.alert('Error', 'No se pudo conectar con el servidor');
-      });
+        Alert.alert('Error', 'No se pudo conectar con el servidor ' + error);
+      }); */
   };
 
   return (

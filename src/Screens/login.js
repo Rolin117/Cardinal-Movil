@@ -21,27 +21,26 @@ export default function Sesion({ navigation }) {
 
   const validarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=getUser`, {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
 
       const data = await response.json();
 
       if (data.status === 1) {
-        navigation.navigate('TabNavigator');
-        console.log("Se ingresa con la sesión activa");
+        cerrarSesion();
       } else {
         console.log("No hay sesión activa");
       }
     } catch (error) {
       console.error(error);
-      Alert.alert('Error', 'Ocurrió un error al validar la sesión');
+      //Alert.alert('Error', 'Ocurrió un error al validar la sesión'+ error);
     }
   };
 
   const cerrarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=logOut`, {
         method: 'GET'
       });
 
@@ -69,7 +68,7 @@ export default function Sesion({ navigation }) {
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
 
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
       });
