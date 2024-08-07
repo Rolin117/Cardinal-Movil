@@ -78,7 +78,7 @@ export default function Sesion({ navigation }) {
       if (data.status) {
         setContrasenia('');
         setUsuario('');
-        navigation.navigate('TabNavigator');
+        navigation.navigate('home');
       } else {
         console.log(data);
         Alert.alert('Error sesión', data.error);
@@ -126,6 +126,9 @@ export default function Sesion({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('registro')}>
             <Text style={styles.link}>Registrarse</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={cerrarSesion}>
+            <Text style={styles.link}>Cerrar sesión</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

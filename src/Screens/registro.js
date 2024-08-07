@@ -46,7 +46,7 @@ export default function Registro({ navigation }) {
     const data = await response.json();
     if (data.status) {
       Alert.alert('Datos Guardados correctamente');
-      navigation.navigate('Sesion');
+      navigation.navigate('login');
     } else {
       Alert.alert('Error', data.error);
     }
