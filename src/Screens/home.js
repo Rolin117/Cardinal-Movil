@@ -65,6 +65,9 @@ export default function home({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate('servicios')}>
           <Icon name="address-book" size={24} color="black" />
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('home')}>
+          <Icon name="home" size={24} color="black" />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
           <Icon name="user" size={24} color="black" />
         </TouchableOpacity>
