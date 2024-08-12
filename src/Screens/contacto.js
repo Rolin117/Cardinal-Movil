@@ -1,10 +1,45 @@
 // Importaciones 
-import React from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Contenido de la página principal
-export default function home({ navigation }) {
+export default function Home({ navigation }) {
+  const [message, setMessage] = useState('');
+
+  const handleSend = () => {
+    if (message.trim() === '') {
+      Alert.alert('Error', 'Por favor, escribe un mensaje antes de enviar.');
+      return;
+    }
+    
+    // Aquí iría la lógica para enviar el mensaje a tu servidor o API
+    // Por ejemplo, usando fetch:
+    /*
+    fetch('https://tu-api.com/enviar-mensaje', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        Alert.alert('Éxito', 'Tu mensaje ha sido enviado.');
+        setMessage(''); // Limpiar el campo de mensaje
+      })
+      .catch(error => {
+        Alert.alert('Error', 'Hubo un problema al enviar el mensaje.');
+      });
+    */
+
+    // Simulación de envío exitoso:
+    setTimeout(() => {
+      Alert.alert('Éxito', 'Tu mensaje ha sido enviado.');
+      setMessage(''); // Limpiar el campo de mensaje
+    }, 1000);
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
@@ -13,9 +48,16 @@ export default function home({ navigation }) {
           ¿Quieres contratar uno de nuestros servicios o tienes una consulta?
           Ponte en contacto con nosotros.
         </Text>
-        <Text style={styles.productName}>Hola!, escribenos tu problema</Text>
-        <TextInput style={styles.input} placeholder="Mensaje" multiline={true} numberOfLines={4} />
-        <TouchableOpacity style={styles.button}>
+        <Text style={styles.productName}>Hola!, escríbenos tu problema</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Mensaje"
+          multiline={true}
+          numberOfLines={4}
+          value={message}
+          onChangeText={setMessage}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSend}>
           <Text style={styles.buttonText}>Enviar</Text>
         </TouchableOpacity>
       </View>
@@ -139,5 +181,5 @@ const styles = StyleSheet.create({
     borderTopColor: '#ccc',
     flexShrink: 0, // Previene que el footer se expanda
   },
-  
 });
+
