@@ -22,7 +22,7 @@ export default function DetalleProducto({ navigation }) {
             <View style={styles.header}>
                 <Image source={require('../img/Logo.png')} style={styles.logo} />
                 <TextInput style={styles.searchInput} placeholder="Buscar productos..." />
-                <TouchableOpacity style={styles.cartIcon}>
+                <TouchableOpacity style={styles.cartIcon} onPress={() => navigation.navigate('carrito')}>
                     <Icon name="shopping-cart" size={24} color="black" />
                 </TouchableOpacity>
             </View>
@@ -54,6 +54,20 @@ export default function DetalleProducto({ navigation }) {
                     </Card>
                 </View>
             </ScrollView>
+            <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
+          <Icon name="cogs" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('servicios')}>
+          <Icon name="address-book" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
+          <Icon name="user" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { }}>
+          <Icon name="history" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
         </View>
     );
 }
