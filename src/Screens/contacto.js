@@ -49,6 +49,7 @@ export default function home({ navigation }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    justifyContent: 'space-between', // Asegura que el footer quede al final
   },
   header: {
     flexDirection: 'row',
@@ -73,6 +74,9 @@ const styles = StyleSheet.create({
   },
   cartIcon: {
     marginLeft: 16,
+  },
+  content: {
+    flex: 1,
   },
   container: {
     padding: 16,
@@ -131,6 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#ccc',
+    flexShrink: 0, // Previene que el footer se expanda
   },
   
 });
