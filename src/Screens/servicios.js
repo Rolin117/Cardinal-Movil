@@ -1,5 +1,5 @@
 // Importaciones 
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -43,22 +43,25 @@ export default function home({ navigation }) {
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.container}>
-        {[1, 2, 3, 4].map((item, index) => (
-          <Card key={index} containerStyle={styles.card}>
-            <TouchableOpacity onPress={() => navigation.navigate('detalle_producto', { id: item.id_servicio})}>
-            <Card.Image style={styles.productImage} source={{ uri: `${ip}/Cardinal_SST-Final/api/services/public/servicios.php?action=readAll` }} />
-              <Card.Divider />
-              <Text style={styles.productName}>{item.descripcion_servicio}Servicios de ingeniería {item}</Text>
-            </TouchableOpacity>
-            <Text style={styles.productDescription}>
-              Somos líderes en la prestación de servicios de ingeniería en pintura, ofreciendo soluciones innovadoras y de alta calidad para satisfacer las necesidades de nuestros clientes. Con años de experiencia y un equipo de ingenieros altamente capacitados.
-            </Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('contacto')}>
-              <Text style={styles.buttonText}>Más información</Text>
-            </TouchableOpacity>
-          </Card>
-        ))}
-      </ScrollView>
+  {dataServicios.map((item, index) => (
+    <Card 
+      key={index} 
+      containerStyle={styles.card}
+      image={{ uri: `${ip}/Cardinal_SST-Final/api/services/public/servicios.php?action=readAll` }}
+      imageStyle={{ display: 'none' }}
+    >
+      <TouchableOpacity onPress={() => navigation.navigate('', { id: item.id_servicio})}>
+        <Text style={styles.productName}>{item.nombre_servicio}</Text>
+      </TouchableOpacity>
+      <Text style={styles.productDescription}>
+        {item.descripcion_servicio}
+      </Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('contacto')}>
+        <Text style={styles.buttonText}>Más información...</Text>
+      </TouchableOpacity>
+    </Card>
+  ))}
+</ScrollView>
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
           <Icon name="cogs" size={24} color="black" />
