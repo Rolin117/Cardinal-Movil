@@ -32,6 +32,21 @@ export default function datos({ navigation }) {
             <Text style={styles.link}>Volver</Text> 
           </TouchableOpacity>
       </ScrollView>
+
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.navigate('datos-usuario')}>
+          <Icon name="cogs" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('servicios')}>
+          <Icon name="address-book" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
+          <Icon name="user" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { }}>
+          <Icon name="history" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -98,5 +113,14 @@ const styles = StyleSheet.create({
   link: {
     color: 'black',
     margin: 20,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 16,
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+    flexShrink: 0, // Previene que el footer se expanda
   },
 });
