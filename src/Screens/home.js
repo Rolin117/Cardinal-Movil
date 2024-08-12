@@ -39,7 +39,7 @@ export default function home({ navigation }) {
       <View style={styles.header}>
         <Image source={require('../img/Logo.png')} style={styles.logo} />
         <TextInput style={styles.searchInput} placeholder="Buscar productos..." />
-        <TouchableOpacity style={styles.cartIcon}>
+        <TouchableOpacity style={styles.cartIcon} onPress={() => navigation.navigate('carrito')}>
           <Icon name="shopping-cart" size={24} color="black" />
         </TouchableOpacity>
       </View>

@@ -2,12 +2,16 @@ import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
+
 
 const ShoppingCart = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => alert('Go back')}>
+        <TouchableOpacity onPress={() => navigation.navigate('servicios')} >
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerText}>Carrito</Text>
@@ -58,8 +62,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   backButton: {
-    fontSize: 24,
+    fontSize: 30, // Aumenta el tamaño de la flecha
+    color: '#333', // Añade color a la flecha
     marginRight: 16,
+    padding: 10, // Aumenta el padding para un mejor área de toque
   },
   headerText: {
     fontSize: 20,
@@ -132,5 +138,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
 
 export default ShoppingCart;

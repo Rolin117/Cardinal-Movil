@@ -7,15 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function home({ navigation }) {
   return (
     <View style={styles.screen}>
-      <View style={styles.header}>
-        <Image source={require('../img/Logo.png')} style={styles.logo} />
-        <TextInput style={styles.searchInput} placeholder="Buscar productos..." />
-        <TouchableOpacity style={styles.cartIcon}>
-          <Icon name="shopping-cart" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
       <View style={styles.container}>
-        <Text style={styles.productName}>¡Contáctanos!</Text>
+        <Text style={styles.productName2}>¡Contáctanos!</Text>
         <Text style={styles.contacDescription}>
           ¿Quieres contratar uno de nuestros servicios o tienes una consulta?
           Ponte en contacto con nosotros.
@@ -79,6 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
+    marginTop: 100,
     padding: 16,
     alignItems: 'center',
   },
@@ -92,6 +86,11 @@ const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 40,
+  },
+  productName2: {
+    fontSize: 30,
     fontWeight: 'bold',
     marginTop: 40,
   },
