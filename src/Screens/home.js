@@ -1,6 +1,6 @@
 // Importaciones
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -47,7 +47,7 @@ export default function home({ navigation }) {
         {dataProductos.map((item, index) => (
           <Card key={index} containerStyle={styles.card}>
             <TouchableOpacity onPress={() => navigation.navigate('detalle_producto', { id: item.id_producto })}>
-              <Card.Image style={styles.productImage} source={{ uri: item.imagen }} />
+              <Card.Image style={styles.productImage} source={{ uri: `${ip}/Cardinal_SST-Final/api/images/productos/${item.imagen_producto}` }} />
               <Card.Divider />
             </TouchableOpacity>
             <Text style={styles.productName}>{item.nombre_producto}</Text>
