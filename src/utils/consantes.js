@@ -8,4 +8,9 @@
 //export const IP = 'http://172.20.10.10';
 
 // Kevin
-export const IP = 'http://192.168.30.176';
+// export const IP = 'http://192.168.30.176';
+
+//Alvaro
+export const IP = 'http://10.10.0.167';
+
+
