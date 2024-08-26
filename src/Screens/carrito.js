@@ -7,10 +7,10 @@ import { useFocusEffect } from '@react-navigation/native';
 // que permite ejecutar un efecto cada vez que la pantalla se enfoca.
 
 import Constants from 'expo-constants';
-import * as Constantes from '../utils/constantes';
-import Buttons from '../components/Buttons/Button';
-import CarritoCard from '../components/CarritoCard/CarritoCard';
-import ModalEditarCantidad from '../components/Modales/ModalEditarCantidad';
+import * as Constantes from '../utils/consantes';
+import Buttons from '../components/Buttons/Butoon';
+import CarritoCard from '../components/Cards/ProductoCard';
+import ModalEditarCantidad from '../components/Cards/ProductoCard';
 
 
 const Carrito = ({navigation}) => {
