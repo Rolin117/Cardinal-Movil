@@ -11,6 +11,7 @@
 // export const IP = 'http://192.168.30.176';
 
 //Alvaro
-export const IP = 'http://10.10.0.167';
+//export const IP = 'http://10.10.0.167';
 
-
+//Dominic
+export const IP = 'http://10.10.2.139';

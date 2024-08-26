@@ -1,12 +1,66 @@
-//Importaciones
-
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Alert, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Constantes from '../utils/consantes';
 
-//Capturaciones de datos 
+export default function DatosU({ navigation }) {
+  const ip = Constantes.IP;
 
-export default function datos({ navigation }) {
+  // Estados para los datos del usuario
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [loading, setLoading] = useState(true); // Estado para indicar si la información está cargando
+  const [error, setError] = useState(null); // Estado para manejar errores
+
+  // Cargar datos desde la API
+  useEffect(() => {
+    const cargarPerfil = async () => {
+      try {
+        const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=readProfile`);
+        const data = await response.json();
+
+        if (response.ok && data) {
+          // Asumiendo que los datos vienen en el objeto data
+          setNombre(data.nombre_cliente);
+          setApellido(data.apellido_cliente);
+          setCorreo(data.correo_cliente);
+          setTelefono(data.telefono_cliente);
+        } else {
+          Alert.alert('Error', 'No se pudo cargar el perfil del usuario');
+        }
+      } catch (error) {
+        setError(error.message);
+        Alert.alert('Error', `Hubo un problema al conectar con la API: ${error.message}`);
+      } finally {
+        setLoading(false); // Dejar de mostrar el indicador de carga
+      }
+    };
+
+    cargarPerfil();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#00B207" />
+        <Text>Cargando perfil...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>Hubo un problema al cargar los datos: {error}</Text>
+        <TouchableOpacity style={styles.button} onPress={() => cargarPerfil()}>
+          <Text style={styles.buttonText}>Reintentar</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <Image source={require('../img/Logo.png')} style={styles.icon} />
@@ -16,21 +70,48 @@ export default function datos({ navigation }) {
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.row}>
-            <TextInput style={[styles.input, styles.halfInput]} placeholder="Nombre" />
-            <TextInput style={[styles.input, styles.halfInput]} placeholder="Apellido" />
+            <TextInput
+              style={[styles.input, styles.halfInput]}
+              placeholder="Nombre"
+              value={nombre}
+              onChangeText={setNombre}
+            />
+            <TextInput
+              style={[styles.input, styles.halfInput]}
+              placeholder="Apellido"
+              value={apellido}
+              onChangeText={setApellido}
+            />
           </View>
-          <TextInput style={styles.input} placeholder="Correo" keyboardType="email-address" />
-          <TextInput style={styles.input} placeholder="Teléfono" keyboardType="phone-pad" />
+          <TextInput
+            style={styles.input}
+            placeholder="Correo"
+            value={correo}
+            onChangeText={setCorreo}
+            keyboardType="email-address"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Teléfono"
+            value={telefono}
+            onChangeText={setTelefono}
+            keyboardType="phone-pad"
+          />
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => { /* lógica para guardar los cambios */ }}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            // lógica para guardar los cambios
+          }}
+        >
           <Text style={styles.buttonText}>Guardar Cambios</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('login')}>
           <Text style={styles.buttonText}>Cerrar sesión</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('home')}>
-            <Text style={styles.link}>Volver</Text> 
-          </TouchableOpacity>
+          <Text style={styles.link}>Volver</Text>
+        </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.footer}>
@@ -43,15 +124,13 @@ export default function datos({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
           <Icon name="user" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => {}}>
           <Icon name="history" size={24} color="black" />
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-
-// Se comienza el codigo de css
 
 const styles = StyleSheet.create({
   screen: {
@@ -121,6 +200,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#ccc',
-    flexShrink: 0, // Previene que el footer se expanda
+    flexShrink: 0,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 20,
   },
 });
