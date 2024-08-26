@@ -1,19 +1,17 @@
-// Importaciones
-
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useFocusEffect } from '@react-navigation/native';
 import * as Constantes from '../utils/consantes';
 
-export default function home({ navigation }) {
+export default function Home({ navigation }) {
   const ip = Constantes.IP;
   const [dataProductos, setDataProductos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
 
   const getProductos = async () => {
     try {
-      // utilizar la direccion IP del servidor y no localhost
+
       const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/producto.php?action=readAll`, {
         method: 'GET',
       });
@@ -34,20 +32,33 @@ export default function home({ navigation }) {
     getProductos();
   }, []);
 
+  // Filtrar productos basados en el término de búsqueda
+  const filteredProducts = dataProductos.filter((producto) =>
+    producto.nombre_producto.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
         <Image source={require('../img/Logo.png')} style={styles.logo} />
-        <TextInput style={styles.searchInput} placeholder="Buscar productos..." />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar productos..."
+          value={searchTerm} // Valor del término de búsqueda
+          onChangeText={setSearchTerm} // Actualiza el término de búsqueda
+        />
         <TouchableOpacity style={styles.cartIcon} onPress={() => navigation.navigate('carrito')}>
           <Icon name="shopping-cart" size={24} color="black" />
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.container}>
-        {dataProductos.map((item, index) => (
+        {filteredProducts.map((item, index) => (
           <Card key={index} containerStyle={styles.card}>
             <TouchableOpacity onPress={() => navigation.navigate('detalle_producto', { id: item.id_producto })}>
-              <Card.Image style={styles.productImage} source={{ uri: `${ip}/Cardinal_SST-Final/api/images/productos/${item.imagen_producto}` }} />
+              <Card.Image
+                style={styles.productImage}
+                source={{ uri: `${ip}/Cardinal_SST-Final/api/images/productos/`}}
+              />
               <Card.Divider />
             </TouchableOpacity>
             <Text style={styles.productName}>{item.nombre_producto}</Text>
@@ -79,7 +90,7 @@ export default function home({ navigation }) {
   );
 }
 
-// Se comienza el código css
+// Estilos
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -151,3 +162,6 @@ const styles = StyleSheet.create({
     borderTopColor: '#ccc',
   },
 });
+{
+
+}

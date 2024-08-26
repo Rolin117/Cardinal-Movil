@@ -18,7 +18,7 @@ export default function DatosU({ navigation }) {
   useEffect(() => {
     const cargarPerfil = async () => {
       try {
-        const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=readProfile`);
+        const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=updateRow`, );
         const data = await response.json();
 
         if (response.ok && data) {
@@ -32,7 +32,7 @@ export default function DatosU({ navigation }) {
         }
       } catch (error) {
         setError(error.message);
-        Alert.alert('Error', `Hubo un problema al conectar con la API: ${error.message}`);
+        Alert.alert('Error  Hubo un problema al conectar con la API', `${error.message}`);
       } finally {
         setLoading(false); // Dejar de mostrar el indicador de carga
       }
@@ -40,6 +40,33 @@ export default function DatosU({ navigation }) {
 
     cargarPerfil();
   }, []);
+
+  const actualizarPerfil = async () => {
+    try {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=updateRow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre_cliente: nombre,
+          apellido_cliente: apellido,
+          correo_cliente: correo,
+          telefono_cliente: telefono,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        Alert.alert('Éxito', 'El perfil ha sido actualizado correctamente');
+      } else {
+        Alert.alert('Error', 'No se pudo actualizar el perfil. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      Alert.alert('Error hubo un problema al conectar con la API:',  `${error.message}`);
+    }
+  };
 
   if (loading) {
     return (
@@ -100,11 +127,9 @@ export default function DatosU({ navigation }) {
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => {
-            // lógica para guardar los cambios
-          }}
+          onPress={actualizarPerfil}
         >
-          <Text style={styles.buttonText}>Guardar Cambios</Text>
+          <Text style={styles.buttonText}>Editar perfil</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('login')}>
           <Text style={styles.buttonText}>Cerrar sesión</Text>
@@ -217,3 +242,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+{
+
+}
