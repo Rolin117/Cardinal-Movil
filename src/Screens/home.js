@@ -52,7 +52,7 @@ export default function home({ navigation }) {
             </TouchableOpacity>
             <Text style={styles.productName}>{item.nombre_producto}</Text>
             <Text style={styles.productPrice}>${item.precio_producto}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => { /* lógica para añadir al carrito */ }}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('carrito')}>
               <Text style={styles.buttonText}>Añadir al Carrito</Text>
             </TouchableOpacity>
           </Card>

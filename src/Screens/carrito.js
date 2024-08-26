@@ -105,7 +105,7 @@ const Carrito = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('servicios')} >
+        <TouchableOpacity onPress={() => navigation.navigate('home')} >
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerText}>Carrito</Text>
