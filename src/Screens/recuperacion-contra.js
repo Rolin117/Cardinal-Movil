@@ -1,11 +1,41 @@
 //Importaciones 
 
-import React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
+import React, {useState} from 'react';
+import {Button, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Alert} from 'react-native';
+import { Icon,} from 'react-native-elements';
+import loading from '../components/loading';
+import {ValidateEmail} from '../utils/helpers';
 
 
 //Contenido de la recuperacion de contraseña
-export default function recupercion({ navigation }) {
+export default function recorverpassword({ navigation }) {
+  const [email, setEmail] = useState('')
+  const [errorEmail, setErrorEmail] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const onSubmit = () =>{
+    if (!validateData()){
+      return
+    }
+
+  Alert.alert("Fuck yeah")
+  }
+
+  const validateData = () => {
+
+    if (!email.trim()) {
+      Alert.alert("Ingresa tu correo, para poder hacer la recuperación de contraseña");
+  } else if (!emailRegex.test(email)) {
+      Alert.alert("Correo no válido");
+  }
+
+  }
+
+
+
+
   return (
     <View style={styles.screen}>
       <Image source={require('../img/Logo.png')} style={styles.icon} />
@@ -14,13 +44,11 @@ export default function recupercion({ navigation }) {
           <Text style={styles.title}>Recuperar Contraseña</Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input} placeholder="Correo" keyboardType="email-address" />
-          <TouchableOpacity style={styles.button} onPress={() => { /* lógica para enviar código */ }}>
-            <Text style={styles.buttonText}>Enviar Código</Text>
-          </TouchableOpacity>
-          <TextInput style={styles.input} placeholder="Código de Recuperación" keyboardType="numeric" />
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('cambio-contra')}>
-            <Text style={styles.buttonText}>Continuar</Text>
+          <TextInput style={styles.input} placeholder="Correo" keyboardType="email-address" 
+          value={email}
+          onChangeText={setEmail}/>
+          <TouchableOpacity style={styles.button} onPress={validateData}>
+            <Text style={styles.buttonText}>Enviar</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.footer}>
