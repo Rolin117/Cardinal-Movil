@@ -8,27 +8,35 @@ export default function DatosU({ navigation }) {
 
   // Estados para los datos del usuario
   const [nombre, setNombre] = useState('');
+  const [perfil, setPerfil] = useState(null); // Estado para almacenar los datos del perfil
   const [apellido, setApellido] = useState('');
   const [correo, setCorreo] = useState('');
   const [telefono, setTelefono] = useState('');
   const [loading, setLoading] = useState(true); // Estado para indicar si la información está cargando
   const [error, setError] = useState(null); // Estado para manejar errores
+  
 
   // Cargar datos desde la API
   useEffect(() => {
     const cargarPerfil = async () => {
       try {
-        const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=updateRow`, );
+        const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=readProfile`,
+          {
+            method: 'GET',
+
+          });
         const data = await response.json();
 
-        if (response.ok && data) {
+        if (data.status) {
           // Asumiendo que los datos vienen en el objeto data
-          setNombre(data.nombre_cliente);
-          setApellido(data.apellido_cliente);
-          setCorreo(data.correo_cliente);
-          setTelefono(data.telefono_cliente);
+          setPerfil(data.dataset); // Guarda los datos del perfil en el estado
+          setNombre(data.dataset.nombre_cliente); // Establece el apellido en el estado
+          setApellido(data.dataset.apellido_cliente); // Establece el apellido en el estado
+          setCorreo(data.dataset.correo_cliente); // Establece el apellido en el estado
+          setTelefono(data.dataset.telefono_cliente); // Establece el apellido en el estado
         } else {
-          Alert.alert('Error', 'No se pudo cargar el perfil del usuario');
+          Alert.alert('Error', 'No se pudo cargar el perfil del usuario', data.error);
+          console.log(data.error);
         }
       } catch (error) {
         setError(error.message);
@@ -43,28 +51,29 @@ export default function DatosU({ navigation }) {
 
   const actualizarPerfil = async () => {
     try {
-      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=updateRow`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nombre_cliente: nombre,
-          apellido_cliente: apellido,
-          correo_cliente: correo,
-          telefono_cliente: telefono,
-        }),
+
+      const formData = new FormData();
+      formData.append('nombre_perfil', nombre); // Añade el nombre al FormData
+      formData.append('apellido_perfil', apellido); // Añade el apellido al FormData
+      formData.append('correo_perfil', correo); // Añade el correo al FormData
+      formData.append('telefono_perfil', telefono); // Añade el teléfono al FormData
+
+      const url = `${ip}/Cardinal_SST-Final/api/services/public/cliente.php?action=editProfile`;
+
+      const response = await fetch(url, {
+          method: 'POST',
+          body: formData,
       });
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      if (data.status) {
         Alert.alert('Éxito', 'El perfil ha sido actualizado correctamente');
       } else {
         Alert.alert('Error', 'No se pudo actualizar el perfil. Por favor, intenta nuevamente.');
       }
     } catch (error) {
-      Alert.alert('Error hubo un problema al conectar con la API:',  `${error.message}`);
+      Alert.alert('Error hubo un problema al conectar con la API:', `${error.message}`);
     }
   };
 
@@ -103,6 +112,7 @@ export default function DatosU({ navigation }) {
               value={nombre}
               onChangeText={setNombre}
             />
+            
             <TextInput
               style={[styles.input, styles.halfInput]}
               placeholder="Apellido"
@@ -149,7 +159,7 @@ export default function DatosU({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
           <Icon name="user" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => { }}>
           <Icon name="history" size={24} color="black" />
         </TouchableOpacity>
       </View>
