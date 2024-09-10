@@ -8,7 +8,7 @@ export default function DatosU({ navigation }) {
 
   // Estados para los datos del usuario
   const [nombre, setNombre] = useState('');
-  const [perfil, setPerfil] = useState(null); // Estado para almacenar los datos del perfil
+     const [perfil, setPerfil] = useState(null); // Estado para almacenar los datos del perfil
   const [apellido, setApellido] = useState('');
   const [correo, setCorreo] = useState('');
   const [telefono, setTelefono] = useState('');

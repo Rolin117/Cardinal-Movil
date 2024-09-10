@@ -41,7 +41,7 @@ const Carrito = ({navigation}) => {
     // Función para obtener los detalles del carrito desde el servidor
   const getDetalleCarrito = async () => {
     try {
-      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/producto.php?action=readAll`, {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/producto.php?action=readDetail`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -61,7 +61,7 @@ const Carrito = ({navigation}) => {
   // Función para finalizar el pedido
   const finalizarPedido = async () => {
     try {
-      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/producto.php?action=readAll`, {
+      const response = await fetch(`${ip}/Cardinal_SST-Final/api/services/public/producto.php?action=finishOrder`, {
         method: 'GET',
       });
       const data = await response.json();
